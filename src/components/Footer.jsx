@@ -35,7 +35,7 @@ function Footer() {
             </a>
 
             {/* GitHub */}
-            <a href="https://github.com/pritamanand" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/Pritam7847" target="_blank" rel="noopener noreferrer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"

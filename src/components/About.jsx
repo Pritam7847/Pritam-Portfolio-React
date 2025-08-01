@@ -35,9 +35,8 @@ const About = () => {
 
             {/* Social Media Icons */}
             <div className="flex justify-center md:justify-start gap-4 text-xl mt-2">
-              <a href="https://github.com/your-username" target="_blank" rel="noreferrer"><FaGithub /></a>
-              <a href="https://linkedin.com/in/your-username" target="_blank" rel="noreferrer"><FaLinkedin /></a>
-              <a href="mailto:your@email.com" target="_blank" rel="noreferrer"><FaEnvelope /></a>
+              <a href="https://github.com/Pritam7847" target="_blank" rel="noreferrer"><FaGithub /></a>
+              <a href="https://linkedin.com/in/pritam-anand-" target="_blank" rel="noreferrer"><FaLinkedin /></a>
             </div>
 
             {/* Bio */}
