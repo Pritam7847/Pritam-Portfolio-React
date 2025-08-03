@@ -69,7 +69,7 @@ useEffect(() => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-[#0f172a] text-white rounded-box z-[1] mt-3 w-52 p-2 shadow">
+              className="menu menu-sm dropdown-content bg-[#000] text-white rounded-box z-[1] mt-3 w-52 p-2 shadow">
               {navItems}
             </ul>
           </div>
