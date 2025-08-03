@@ -6,11 +6,15 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    font-family: "Poppins", sans-serif;
+body {
+  font-family: "Poppins", sans-serif;
+  color: #ffffff; /* Text visible in light/dark mode */
+}
+
+h1, h2, h3, p, a, span, div {
+  color: inherit;
 }
 
 html {
   scroll-behavior: smooth;
 }
-
