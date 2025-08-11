@@ -3,6 +3,7 @@ import { TypeAnimation } from "react-type-animation";
 import SocialLinks from "./SocialLinks";
 import TechStack from "./TechStack";
 import PritamAnand from "../assets/PritamAnand.pdf";
+import DecryptedText from "../reactBits/DecryptedText.jsx";
 
 function Hero() {
   return (
@@ -23,7 +24,11 @@ function Hero() {
           className="text-4xl ml-8 sm:text-6xl sm:ml-40 md:text-7xl md:ml-56 lg:text-8xl lg:ml-44 text-yellow-300"
           style={{ textShadow: "0 0 8px #facc15" }}
         >
-          Pritam Anand
+          <DecryptedText
+  text="Pritam Anand"
+  animateOn="view"
+  revealDirection="center"
+/>
         </h1>
 
         <br className="hidden sm:block" />
