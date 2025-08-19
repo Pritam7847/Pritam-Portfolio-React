@@ -1,5 +1,5 @@
 import React from 'react';
-import PritamAnand from "../assets/PritamAnand.pdf";
+import Pritam_Resume_ from "../assets/Pritam_Resume_.pdf";
 
 function Hireme() {
   return (
@@ -13,7 +13,7 @@ function Hireme() {
         {/* Resume PDF Viewer */}
         <div className="w-full h-[600px] bg-white rounded-lg overflow-hidden shadow-lg mb-6">
           <iframe
-            src={PritamAnand}
+            src={Pritam_Resume_}
             className="w-full h-full"
             title="Resume PDF"
           />
