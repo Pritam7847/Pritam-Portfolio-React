@@ -2,7 +2,7 @@ import React from "react";
 import { TypeAnimation } from "react-type-animation";
 import SocialLinks from "./SocialLinks";
 import TechStack from "./TechStack";
-import Pritam_Resume_ from "../assets/PritamAnand.pdf";
+import Pritam_Resume_ from "../assets/Pritam_Resume_.pdf";
 import DecryptedText from "../reactBits/DecryptedText.jsx";
 
 function Hero() {
