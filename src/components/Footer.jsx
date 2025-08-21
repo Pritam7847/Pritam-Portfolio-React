@@ -1,6 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 function Footer() {
+  const [visits, setVisits] = useState(0);
+
+  useEffect(() => {
+    fetch("https://api.countapi.xyz/hit/pritam-portfolio-react.vercel.app/visits")
+      .then(res => res.json())
+      .then(data => setVisits(data.value));
+  }, []);
+
   return (
     <>
       <div>
@@ -45,14 +53,13 @@ function Footer() {
               >
                 <path d="M12 0a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.58v-2.01c-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.35-1.78-1.35-1.78-1.1-.76.08-.75.08-.75 1.22.09 1.87 1.25 1.87 1.25 1.08 1.85 2.83 1.32 3.52 1.01.11-.78.42-1.32.76-1.62-2.66-.3-5.47-1.33-5.47-5.92 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.16 0 0 1-.32 3.3 1.23a11.5 11.5 0 016 0c2.28-1.55 3.28-1.23 3.28-1.23.67 1.64.26 2.86.13 3.16.77.84 1.24 1.91 1.24 3.22 0 4.6-2.81 5.61-5.49 5.91.43.38.81 1.12.81 2.26v3.35c0 .32.22.7.83.58A12 12 0 0012 0z" />
               </svg>
-              
             </a>
-            
           </nav>
+
           <div>
             <p className='font-semibold'>Email Id: <span className='font-bold text-red-600'>himanshusingh7847@gmail.com</span></p>
+            <p className='mt-1 text-sm ml-16'>👀 Visitors Count(Testing): <span className="font-bold text-green-400">{visits}</span></p>
           </div>
-          
         </footer>
       </div>
     </>
