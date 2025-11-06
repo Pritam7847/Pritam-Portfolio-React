@@ -2,7 +2,7 @@ import React from "react";
 import { TypeAnimation } from "react-type-animation";
 import SocialLinks from "./SocialLinks";
 import TechStack from "./TechStack";
-import PRITAMResume from "../assets/PRITAMResume.pdf";
+import PRITAMANAND from "../assets/PRITAMANAND.pdf";
 import DecryptedText from "../reactBits/DecryptedText.jsx";
 
 function Hero() {
@@ -64,7 +64,7 @@ function Hero() {
 
       <div className="w-full text-left ml-4 lg:ml-44">
         <a
-          href={PRITAMResume}
+          href={PRITAMANAND}
           download
           className="ml-5 sm:ml-0 mt-4 btn btn-sm sm:btn-md md:btn-lg hover:bg-blue-400 hover:text-black"
         >
