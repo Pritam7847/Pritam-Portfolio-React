@@ -11,6 +11,9 @@ import {
 } from "react-icons/fa";
 import { SiExpress, SiTailwindcss, SiMongodb } from "react-icons/si";
 import code from "../assets/code.png";
+// import pp from "../assets/pp.png";
+
+// import ProfileCard from "../reactBits/ProfileCard.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,7 +49,7 @@ export default function TechStack() {
       className="flex flex-col md:flex-row items-center justify-center gap-12 py-16 px-6"
     >
       {/* Left side - Illustration or Image */}
-      <div className="w-full md:w-1/2">
+      <div className="w-full md:w-1/2 ml-40">
         <img
           src={code}
           alt="Coding illustration"
