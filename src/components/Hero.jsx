@@ -4,7 +4,7 @@ import SocialLinks from "./SocialLinks";
 import TechStack from "./TechStack";
 
 import DecryptedText from "../reactBits/DecryptedText.jsx";
-import PritamAnand from "../assets/PritamAnand.pdf";
+import PRITAMANAND from "../assets/PritamAnand.pdf";
 
 function Hero() {
   return (
@@ -65,7 +65,7 @@ function Hero() {
 
       <div className="w-full text-left ml-4 lg:ml-44">
         <a
-          href={PritamAnand}
+          href={PRITAMANAND}
           download
           className="ml-5 sm:ml-0 mt-4 btn btn-sm sm:btn-md md:btn-lg hover:bg-blue-400 hover:text-black"
         >
