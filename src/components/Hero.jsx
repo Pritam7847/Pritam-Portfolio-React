@@ -2,8 +2,9 @@ import React from "react";
 import { TypeAnimation } from "react-type-animation";
 import SocialLinks from "./SocialLinks";
 import TechStack from "./TechStack";
-import PRITAMANAND from "../assets/PRITAMANAND.pdf";
+
 import DecryptedText from "../reactBits/DecryptedText.jsx";
+import PritamAnand from "../assets/PritamAnand.pdf";
 
 function Hero() {
   return (
@@ -41,7 +42,7 @@ function Hero() {
               "Student",
               3000,
               "",
-              "Full Stack Web Developer (MERN)",
+              "Full Stack Developer",
               3000,
               "",
             ]}
@@ -56,7 +57,7 @@ function Hero() {
 
         <p className="text-base sm:text-lg ml-8 mr-4 md:text-xl sm:ml-20 md:ml-40 lg:ml-44 sm:mr-8">
           A final-year B.Tech student with a passion for Full Stack Web
-          Development (MERN) 🚀. Experienced in building dynamic web
+          Development 🚀. Experienced in building dynamic web
           applications using JavaScript, React.js, Node.js, MongoDB, and other
           modern libraries and frameworks.
         </p>
@@ -64,7 +65,7 @@ function Hero() {
 
       <div className="w-full text-left ml-4 lg:ml-44">
         <a
-          href={PRITAMANAND}
+          href={PritamAnand}
           download
           className="ml-5 sm:ml-0 mt-4 btn btn-sm sm:btn-md md:btn-lg hover:bg-blue-400 hover:text-black"
         >
