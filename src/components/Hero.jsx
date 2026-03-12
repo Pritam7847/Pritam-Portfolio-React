@@ -4,7 +4,7 @@ import SocialLinks from "./SocialLinks";
 import TechStack from "./TechStack";
 
 import DecryptedText from "../reactBits/DecryptedText.jsx";
-import PRITAMANAND from "../assets/PritamAnand.pdf";
+import PRITAMANAND from "../assets/PRITAMANAND.pdf";
 
 function Hero() {
   return (

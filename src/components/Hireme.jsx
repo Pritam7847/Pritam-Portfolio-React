@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PRITAMANAND from "../assets/PritamAnand.pdf";
+import PRITAMANAND from "../assets/PRITAMANAND.pdf";
 
 function Hireme() {
   return (
