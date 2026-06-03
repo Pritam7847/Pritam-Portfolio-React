@@ -1,5 +1,5 @@
-import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
-import { useEffect, useRef, useState } from "react";
+import { Renderer, Program, Mesh, Color, Geometry } from "ogl";
+import { useEffect, useRef } from "react";
 
 const VERT = `#version 300 es
 in vec2 position;
@@ -19,7 +19,6 @@ uniform float uBlend;
 
 out vec4 fragColor;
 
-/* ---- noise + shader code unchanged ---- */
 vec3 permute(vec3 x) {
   return mod(((x * 34.0) + 1.0) * x, 289.0);
 }
@@ -49,7 +48,6 @@ float snoise(vec2 v){
     ),
     0.0
   );
-
   m = m * m;
   m = m * m;
 
@@ -57,7 +55,6 @@ float snoise(vec2 v){
   vec3 h = abs(x) - 0.5;
   vec3 ox = floor(x + 0.5);
   vec3 a0 = x - ox;
-
   m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
 
   vec3 g;
@@ -66,141 +63,155 @@ float snoise(vec2 v){
   return 130.0 * dot(m, g);
 }
 
+struct ColorStop {
+  vec3 color;
+  float position;
+};
+
+#define COLOR_RAMP(colors, factor, finalColor) { \
+  int index = 0; \
+  for (int i = 0; i < 2; i++) { \
+    ColorStop currentColor = colors[i]; \
+    bool isInBetween = currentColor.position <= factor; \
+    index = int(mix(float(index), float(i), float(isInBetween))); \
+  } \
+  ColorStop currentColor = colors[index]; \
+  ColorStop nextColor = colors[index + 1]; \
+  float range = nextColor.position - currentColor.position; \
+  float lerpFactor = (factor - currentColor.position) / range; \
+  finalColor = mix(currentColor.color, nextColor.color, lerpFactor); \
+}
+
 void main() {
   vec2 uv = gl_FragCoord.xy / uResolution;
 
-  vec3 rampColor = mix(
-    mix(uColorStops[0], uColorStops[1], uv.x),
-    uColorStops[2],
-    uv.x * uv.x
-  );
+  ColorStop colors[3];
+  colors[0] = ColorStop(uColorStops[0], 0.0);
+  colors[1] = ColorStop(uColorStops[1], 0.5);
+  colors[2] = ColorStop(uColorStops[2], 1.0);
 
-  float height = snoise(vec2(uv.x * 2.0 + uTime, uTime * 0.25)) * 0.5 * uAmplitude;
+  vec3 rampColor;
+  COLOR_RAMP(colors, uv.x, rampColor);
+
+  float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
   height = exp(height);
-  height = uv.y * 2.0 - height + 0.2;
-
+  height = (uv.y * 2.0 - height + 0.2);
   float intensity = 0.6 * height;
-  float alpha = smoothstep(0.15, 0.15 + uBlend, intensity);
 
-  fragColor = vec4(rampColor * intensity * alpha, alpha);
+  float midPoint = 0.20;
+  float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
+
+  vec3 auroraColor = intensity * rampColor;
+
+  fragColor = vec4(auroraColor * auroraAlpha, auroraAlpha);
 }
 `;
 
-export default function Aurora({
-  colorStops = ["#5227FF", "#7cff67", "#5227FF"],
-  amplitude = 1.0,
-  blend = 0.5,
-  speed = 1.0,
-}) {
+export default function Aurora(props) {
+  const {
+    colorStops = ["#5227FF", "#7cff67", "#5227FF"],
+    amplitude = 1.0,
+    blend = 0.5,
+  } = props;
+  const propsRef = useRef(props);
+  propsRef.current = props;
+
   const containerRef = useRef(null);
-  const propsRef = useRef({ colorStops, amplitude, blend, speed });
-  propsRef.current = { colorStops, amplitude, blend, speed };
 
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-
-  /* ---------- device check ---------- */
   useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  /* ---------- visibility check ---------- */
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([e]) => setIsVisible(e.isIntersecting),
-      { threshold: 0.1 }
-    );
-    if (containerRef.current) observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  /* ---------- WebGL ---------- */
-  useEffect(() => {
-    if (!isDesktop || !isVisible) return;
-
-    const lowEnd =
-      navigator.hardwareConcurrency <= 4 ||
-      navigator.deviceMemory <= 4;
-
-    if (lowEnd) return;
-
     const container = containerRef.current;
     if (!container) return;
 
-    const renderer = new Renderer({ alpha: true, antialias: true });
+    const renderer = new Renderer({
+      alpha: true,
+      premultipliedAlpha: true,
+      antialias: true,
+    });
     const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0);
 
-    const geometry = new Triangle(gl);
-    const program = new Program(gl, {
+    if (!gl) {
+      console.warn("Aurora: WebGL is not available in this browser.");
+      return;
+    }
+
+    gl.clearColor(0, 0, 0, 0);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    gl.canvas.style.backgroundColor = "transparent";
+
+    let program;
+
+    const resize = () => {
+      if (!container) return;
+      const width = container.offsetWidth;
+      const height = container.offsetHeight;
+      renderer.setSize(width, height);
+      if (program) {
+        program.uniforms.uResolution.value = [width, height];
+      }
+    };
+    window.addEventListener("resize", resize);
+
+    const geometry = new Geometry(gl, {
+      position: {
+        size: 2,
+        data: new Float32Array([-1, -1, 3, -1, -1, 3]),
+      },
+    });
+
+    const colorStopsArray = colorStops.map((hex) => {
+      const c = new Color(hex);
+      return [c.r, c.g, c.b];
+    });
+
+    program = new Program(gl, {
       vertex: VERT,
       fragment: FRAG,
       uniforms: {
         uTime: { value: 0 },
         uAmplitude: { value: amplitude },
-        uBlend: { value: blend },
+        uColorStops: { value: colorStopsArray },
         uResolution: { value: [container.offsetWidth, container.offsetHeight] },
-        uColorStops: {
-          value: colorStops.map(c => {
-            const col = new Color(c);
-            return [col.r, col.g, col.b];
-          }),
-        },
+        uBlend: { value: blend },
       },
     });
 
     const mesh = new Mesh(gl, { geometry, program });
     container.appendChild(gl.canvas);
 
-    const resize = () => {
-      renderer.setSize(container.offsetWidth, container.offsetHeight);
-      program.uniforms.uResolution.value = [
-        container.offsetWidth,
-        container.offsetHeight,
-      ];
+    let animateId = 0;
+    const update = (t) => {
+      animateId = requestAnimationFrame(update);
+      const { time = t * 0.01, speed = 1.0 } = propsRef.current;
+      program.uniforms.uTime.value = time * speed * 0.1;
+      program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
+      program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
+      const stops = propsRef.current.colorStops ?? colorStops;
+      program.uniforms.uColorStops.value = stops.map((hex) => {
+        const c = new Color(hex);
+        return [c.r, c.g, c.b];
+      });
+      renderer.render({ scene: mesh });
     };
+    animateId = requestAnimationFrame(update);
+
     resize();
-    window.addEventListener("resize", resize);
-
-    /* ---------- FPS LIMIT ---------- */
-    let rafId;
-    let last = 0;
-    const FPS = 30;
-    const interval = 1000 / FPS;
-
-    const animate = (t) => {
-      if (t - last > interval) {
-        last = t;
-        program.uniforms.uTime.value += 0.01 * propsRef.current.speed;
-        renderer.render({ scene: mesh });
-      }
-      rafId = requestAnimationFrame(animate);
-    };
-    rafId = requestAnimationFrame(animate);
-
-    /* ---------- pause on tab change ---------- */
-    const onVisibility = () => {
-      if (document.hidden) cancelAnimationFrame(rafId);
-      else rafId = requestAnimationFrame(animate);
-    };
-    document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
-      cancelAnimationFrame(rafId);
-      document.removeEventListener("visibilitychange", onVisibility);
+      cancelAnimationFrame(animateId);
       window.removeEventListener("resize", resize);
-      container.removeChild(gl.canvas);
+      if (container && gl.canvas.parentNode === container) {
+        container.removeChild(gl.canvas);
+      }
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [isDesktop, isVisible]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [amplitude]);
 
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 h-full w-full min-h-screen pointer-events-none"
     />
   );
 }
