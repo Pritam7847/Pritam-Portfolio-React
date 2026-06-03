@@ -37,6 +37,12 @@ const advancedProjects = [
     description: "A collaborative idea management tool allowing users to store, share, and refine ideas.", 
     link: "https://github.com/Pritam7847" 
   },
+  {
+  title: "AvsarPath",
+  tech: "React, Tailwind CSS, Python, Flask",
+  description: "Built an AI-assisted Gen-Z career platform that helps students and fresh graduates discover hidden opportunities, generate personalized outreach messages, strengthen their professional profiles, and navigate career growth with actionable insights.",
+  link: "https://github.com/Pritam7847"
+},
 ];
 
 function ProjectCard({ title, tech, description, link }) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-import Aurora from './components/Aurora';
+import PortfolioBackground from './components/PortfolioBackground';
 import './App.css';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
@@ -17,15 +17,7 @@ function App() {
   return (
     <Router>
       <div className="relative min-h-screen w-full overflow-hidden">
-        {/* Aurora Background */}
-        <div className="absolute inset-0 -z-10 bg-once">
-          <Aurora
-            colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
-            blend={0.5}
-            amplitude={1.0}
-            speed={0.5}
-          />
-        </div>
+        <PortfolioBackground />
 
         {/* Foreground Content */}
         <Navbar />

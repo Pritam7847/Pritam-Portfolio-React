@@ -39,7 +39,7 @@ function Hero() {
           I’m a&nbsp;
           <TypeAnimation
             sequence={[
-              "Student",
+              "Aspiring",
               3000,
               "",
               "Full Stack Developer",
@@ -56,7 +56,7 @@ function Hero() {
         <br className="hidden sm:block" />
 
         <p className="text-base sm:text-lg ml-8 mr-4 md:text-xl sm:ml-20 md:ml-40 lg:ml-44 sm:mr-8">
-          A final-year B.Tech student with a passion for Full Stack Web
+          A B.Tech Graduate with a passion for Full Stack Web
           Development 🚀. Experienced in building dynamic web
           applications using JavaScript, React.js, Node.js, MongoDB, and other
           modern libraries and frameworks.
