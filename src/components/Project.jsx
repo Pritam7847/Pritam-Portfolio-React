@@ -41,7 +41,7 @@ const advancedProjects = [
   title: "AvsarPath",
   tech: "React, Tailwind CSS, Python, Flask",
   description: "Built an AI-assisted Gen-Z career platform that helps students and fresh graduates discover hidden opportunities, generate personalized outreach messages, strengthen their professional profiles, and navigate career growth with actionable insights.",
-  link: "https://github.com/Pritam7847"
+  link: "https://avsar-path.vercel.app/"
 },
 ];
 
