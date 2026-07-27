@@ -1,6 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React from "react";
 import {
   FaHtml5,
   FaCss3Alt,
@@ -11,43 +9,10 @@ import {
 } from "react-icons/fa";
 import { SiExpress, SiTailwindcss, SiMongodb } from "react-icons/si";
 import code from "../assets/code.png";
-// import pp from "../assets/pp.png";
-
-// import ProfileCard from "../reactBits/ProfileCard.jsx";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function TechStack() {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    // use gsap.context for proper scoping + auto cleanup (helps with React StrictMode)
-    const ctx = gsap.context(() => {
-      gsap.from(sectionRef.current, {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
-          // markers: true, // <-- enable while debugging to see trigger positions
-        },
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "power3.out",
-        immediateRender: false, // important so element isn't hidden immediately
-      });
-    }, sectionRef);
-
-    return () => ctx.revert(); // cleanup animations & ScrollTrigger
-  }, []);
-
   return (
-    <div
-      ref={sectionRef}
-      className="flex flex-col md:flex-row items-center justify-center gap-12 py-16 px-6"
-    >
+    <div className="flex flex-col md:flex-row items-center justify-center gap-12 py-16 px-6">
       {/* Left side - Illustration or Image */}
       <div className="w-full md:w-1/2 ml-40">
         <img
