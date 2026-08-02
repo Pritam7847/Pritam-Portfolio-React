@@ -67,7 +67,7 @@ function Footer() {
           <p className="text-sm md:text-base">
             Email:{" "}
             <span className="font-semibold text-white hover:underline cursor-pointer">
-              himanshusingh7847@gmail.com
+              pritamanand822@gmail.com
             </span>
           </p>
         </div>

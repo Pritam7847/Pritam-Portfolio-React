@@ -63,7 +63,7 @@ function SocialLinks() {
               </a>
               
             ))}
-            <p className='font-semibold'>Email Id: <span className='font-bold text-red-600'>himanshusingh7847@gmail.com</span></p>
+            <p className='font-semibold'>Email Id: <span className='font-bold text-red-600'>pritamanand822@gmail.com</span></p>
           </div>
         </div>
 

@@ -1,93 +1,207 @@
-import React from 'react';
-import Navbar from './Navbar'; // adjust the path if it's in a different folder
-import { FaGithub, FaLinkedin, FaEnvelope, FaGlobeAsia } from 'react-icons/fa';
-import me from '../assets/me.jpg'; // Adjust path if needed
+import React from "react";
+import { FaGithub, FaLinkedin, FaGlobeAsia } from "react-icons/fa";
+import me from "../assets/me.jpg";
 
 const About = () => {
   return (
-    <>
+    <section
+      id="about"
+      className="min-h-screen bg-black text-white px-6 py-16"
+    >
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12">
+        {/* Left Side */}
+        <div className="flex flex-col items-center">
+          <img
+            src={me}
+            alt="Pritam Anand"
+            className="w-48 h-48 rounded-full object-cover border-4 border-indigo-500 shadow-lg"
+          />
 
-      <section className="min-h-screen text-white p-8" id="about">
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-10 max-w-6xl mx-auto">
-          
-          {/* Profile Image + Language Switch */}
-          <div className="flex flex-col items-center gap-4">
-            <img
-              src={me}
-              alt="Profile"
-              className="w-48 h-48 object-cover rounded-full border-4 border-indigo-500 shadow-lg"
-            />
-            <div className="flex items-center gap-2 text-sm">
-              <FaGlobeAsia />
-              Patna , Bihar
-            </div>
-            <div className="flex gap-2">
-              <button className="px-4 py-1 border rounded-full text-sm">English</button>
-              <button className="px-4 py-1 border rounded-full text-sm">Hindi</button>
-            </div>
+          <div className="flex items-center gap-2 mt-4 text-gray-300">
+            <FaGlobeAsia />
+            <span>Patna, Bihar</span>
           </div>
 
-          {/* Info Section */}
-          <div className="flex-1 text-center md:text-left space-y-4">
+          <div className="flex gap-3 mt-4">
+            <button className="px-4 py-1 rounded-full border border-gray-500 hover:border-indigo-500 transition">
+              English
+            </button>
 
-            <h1 className="text-4xl font-bold">Pritam Anand</h1>
-            <h2 className="text-lg text-gray-300">MERN Stack Developer</h2>
-
-            {/* Social Media Icons */}
-            <div className="flex justify-center md:justify-start gap-4 text-xl mt-2">
-              <a href="https://github.com/Pritam7847" target="_blank" rel="noreferrer"><FaGithub /></a>
-              <a href="https://linkedin.com/in/pritam-anand-" target="_blank" rel="noreferrer"><FaLinkedin /></a>
-            </div>
-
-            {/* Bio */}
-            <p className="text-gray-300">
-              I'm a passionate developer from India with a knack for building responsive and user-friendly web apps using the MERN Stack. I love turning ideas into real, usable products.
-            </p>
-
-            {/* Education */}
-            <div>
-            <h3 className="text-2xl font-bold mt-16 mb-2">Education</h3>
-            <div className="space-y-4 text-gray-200">
-
-                <div className="flex justify-between">
-                <div>
-                    <strong>DAV Public School, Anishabad, Patna</strong>
-                    <p className="text-indigo-400">Nursery – Grade 7</p>
-                </div>
-                <div className="text-sm text-gray-400">—</div>
-                </div>
-
-                <div className="flex justify-between">
-                <div>
-                    <strong>DAV Public School, WALMI Complex, Patna</strong>
-                    <p className="text-indigo-400">Grade 8 – Grade 10 | CBSE Board</p>
-                </div>
-                <div className="text-sm text-gray-400">Completed in 2020</div>
-                </div>
-
-                <div className="flex justify-between">
-                <div>
-                    <strong>Park Mount Public School, Patna</strong>
-                    <p className="text-indigo-400">Grade 11 – Grade 12 | CBSE Board</p>
-                </div>
-                <div className="text-sm text-gray-400">Completed in 2022</div>
-                </div>
-
-                <div className="flex justify-between">
-                <div>
-                    <strong>Trident Academy of Technology, Bhubaneswar</strong>
-                    <p className="text-indigo-400">B.Tech in Computer Science</p>
-                </div>
-                <div className="text-sm text-gray-400">2022 – 2026</div>
-                </div>
-
-            </div>
-            </div>
-
+            <button className="px-4 py-1 rounded-full border border-gray-500 hover:border-indigo-500 transition">
+              Hindi
+            </button>
           </div>
         </div>
-      </section>
-    </>
+
+        {/* Right Side */}
+        <div className="flex-1">
+          <h1 className="text-4xl font-bold">Pritam Anand</h1>
+
+          <h2 className="text-lg text-gray-400 mt-2">
+            Full Stack Developer
+          </h2>
+
+          {/* Social Links */}
+          <div className="flex gap-5 text-2xl mt-5">
+            <a
+              href="https://github.com/Pritam7847"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-indigo-400 transition"
+            >
+              <FaGithub />
+            </a>
+
+            <a
+              href="https://linkedin.com/in/pritam-anand-"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-indigo-400 transition"
+            >
+              <FaLinkedin />
+            </a>
+          </div>
+
+          {/* Bio */}
+          <p className="mt-6 text-gray-300 leading-8">
+            I'm a passionate developer with a knack for building
+            responsive and user-friendly web applications using the MERN Stack.
+            I enjoy transforming ideas into scalable and impactful digital
+            products while continuously learning modern technologies.
+          </p>
+
+          {/* Education */}
+          <div className="mt-16">
+            <u><h3 className="text-2xl font-bold mb-6">Education</h3></u>
+
+            <div className="space-y-8">
+              <div className="flex flex-col md:flex-row md:justify-between gap-2">
+                <div>
+                  <h4 className="font-semibold">
+                    DAV Public School, Anishabad, Patna
+                  </h4>
+                  <p className="text-indigo-400">Nursery – Grade 7</p>
+                </div>
+
+                <span className="text-gray-400">—</span>
+              </div>
+
+              <div className="flex flex-col md:flex-row md:justify-between gap-2">
+                <div>
+                  <h4 className="font-semibold">
+                    DAV Public School, WALMI Complex, Patna
+                  </h4>
+                  <p className="text-indigo-400">
+                    Grade 8 – Grade 10 | CBSE Board
+                  </p>
+                </div>
+
+                <span className="text-gray-400">
+                  Completed in 2020
+                </span>
+              </div>
+
+              <div className="flex flex-col md:flex-row md:justify-between gap-2">
+                <div>
+                  <h4 className="font-semibold">
+                    Park Mount Public School, Patna
+                  </h4>
+                  <p className="text-indigo-400">
+                    Grade 11 – Grade 12 | CBSE Board
+                  </p>
+                </div>
+
+                <span className="text-gray-400">
+                  Completed in 2022
+                </span>
+              </div>
+
+              <div className="flex flex-col md:flex-row md:justify-between gap-2">
+                <div>
+                  <h4 className="font-semibold">
+                    Trident Academy of Technology, Bhubaneswar
+                  </h4>
+                  <p className="text-indigo-400">
+                    B.Tech in Computer Science & Engineering
+                  </p>
+                </div>
+
+                <span className="text-gray-400">
+                  2022 – 2026
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Experience */}
+          <div className="mt-16">
+            <u><h3 className="text-2xl font-bold mb-6">Experience</h3></u>
+
+            <div className="flex flex-col md:flex-row md:justify-between gap-2">
+              <div>
+                <h4 className="font-semibold">
+                  CodeTech IT Solutions
+                </h4>
+
+                <p className="text-indigo-400">
+                  Web Developer Intern
+                </p>
+              </div>
+
+              <span className="text-gray-400">
+                June 2024 – July 2024
+              </span>
+            </div>
+            <br />
+            <div className="flex flex-col md:flex-row md:justify-between gap-2">
+              <div>
+                <h4 className="font-semibold">
+                  Myra's Global Tech
+                </h4>
+
+                <p className="text-indigo-400">
+                  Web Developer Intern
+                </p>
+              </div>
+
+              <span className="text-gray-400">
+                July 2026 – Present
+              </span>
+            </div>
+
+          </div>
+
+          {/* Skills
+          <div className="mt-16">
+            <u><h3 className="text-2xl font-bold mb-6">Skills</h3></u>
+
+            <div className="flex flex-wrap gap-3">
+              {[
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "React",
+                "Node.js",
+                "Express.js",
+                "MongoDB",
+                "Tailwind CSS",
+                "Git",
+                "GitHub",
+                "Python",
+                "FastAPI"
+              ].map((skill) => (
+                <span
+                  key={skill}
+                  className="px-4 py-2 rounded-full bg-indigo-600/20 border border-indigo-500 text-indigo-300"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div> */}
+        </div>
+      </div>
+    </section>
   );
 };
 

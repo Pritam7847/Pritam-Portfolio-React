@@ -6,27 +6,47 @@ import {
   FaReact,
   FaNodeJs,
   FaBootstrap,
+  FaPython,
 } from "react-icons/fa";
-import { SiExpress, SiTailwindcss, SiMongodb } from "react-icons/si";
-import code from "../assets/code.png";
+import { SiExpress, SiTailwindcss, SiMongodb, SiFastapi } from "react-icons/si";
+import ProfileCard from "../reactBits/ProfileCard";
+import pp from "../assets/pp.png";
+//import code from "../assets/code.png";
 
 export default function TechStack() {
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-12 py-16 px-6">
       {/* Left side - Illustration or Image */}
-      <div className="w-full md:w-1/2 ml-40">
+      {/* <div className="w-full md:w-1/2 ml-40">
         <img
           src={code}
           alt="Coding illustration"
           className="w-full max-w-sm mx-auto rounded-xl shadow-lg"
         />
-      </div>
+      </div> */}
+
+      <ProfileCard
+        name="Pritam Anand"
+        title="Software Developer"
+        handle="javicodes"
+        status="Online"
+        contactText="Contact Me"
+        avatarUrl={pp}
+        showUserInfo={false}
+        enableTilt={true}
+        enableMobileTilt={false}
+        onContactClick={() => console.log("Contact clicked")}
+        behindGlowColor="rgba(125, 190, 255, 0.67)"
+        iconUrl="/assets/demo/iconpattern.png"
+        behindGlowEnabled
+        innerGradient="linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
+      />
 
       {/* Right side - Tech Stack */}
       <div className="w-full md:w-1/2">
         <h2 className="text-4xl font-bold mb-4">What I do</h2>
         <p className="text-lg text-gray-400 mb-6">
-          MERN STACK DEVELOPER WHO LOVES TO BUILD AND EXPLORE MODERN TECH STACKS
+          A DEVELOPER WHO LOVES TO BUILD AND EXPLORE MODERN TECH STACKS
         </p>
 
         <div className="flex flex-wrap gap-6 text-4xl text-white-300">
@@ -65,6 +85,15 @@ export default function TechStack() {
           <SiMongodb
             title="MongoDB"
             className="hover:text-green-700 transition duration-300"
+          />
+          <FaPython
+            title="Python"
+            className="hover:text-yellow-400 transition duration-300"
+          />
+
+          <SiFastapi
+            title="FastAPI"
+            className="hover:text-teal-500 transition duration-300"
           />
         </div>
 
